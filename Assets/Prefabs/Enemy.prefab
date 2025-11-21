@@ -149,4 +149,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9362a4c891c627246945cea33bff231a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceIntensity: 0.5
+  forceIntensity: 0.3
