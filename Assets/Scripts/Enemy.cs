@@ -3,6 +3,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float forceIntensity;
+    public float minY;
 
     private GameObject player;    
     private Rigidbody body;
@@ -22,5 +23,10 @@ public class Enemy : MonoBehaviour
         Vector3 force = direction * forceIntensity;
         force.y = 0;
         body.AddForce(force);
+
+        if (transform.position.y < minY)
+        {
+            Destroy(gameObject);
+        }
     }
 }
