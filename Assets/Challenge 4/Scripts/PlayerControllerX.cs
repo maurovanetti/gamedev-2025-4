@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerControllerX : MonoBehaviour
@@ -53,25 +54,24 @@ public class PlayerControllerX : MonoBehaviour
 
     // If Player collides with enemy
     private void OnCollisionEnter(Collision other)
-    {
+    {        
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Rigidbody enemyRigidbody = other.gameObject.GetComponent<Rigidbody>();
-            Vector3 awayFromPlayer =  transform.position - other.gameObject.transform.position; 
-           
-            if (hasPowerup) // if have powerup hit enemy with powerup force
+            if (hasPowerup)
             {
-                enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
+                PushEnemy(other.gameObject, powerupStrength);
             }
-            else // if no powerup, hit enemy with normal strength 
+            else
             {
-                enemyRigidbody.AddForce(awayFromPlayer * normalStrength, ForceMode.Impulse);
-            }
-
-
+                PushEnemy(other.gameObject, normalStrength);
+            }           
         }
     }
 
-
-
+    void PushEnemy(GameObject enemy, float strength)
+    {
+        Rigidbody enemyRigidbody = enemy.GetComponent<Rigidbody>();
+        Vector3 awayFromPlayer = enemy.transform.position - transform.position;
+        enemyRigidbody.AddForce(awayFromPlayer * strength, ForceMode.Impulse);
+    }
 }
